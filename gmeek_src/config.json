@@ -26,5 +26,5 @@
   "rssSplit": "sentence",
   "exlink": {},
   "needComment": 1,
-  "allHead": "<style>@font-face{font-family:'CustomFont';src:url('/static/fonts/AaGaiShiKeAiTianTianQuan-2.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}body{font-family:'CustomFont','Segoe UI','Microsoft YaHei',sans-serif !important;}h1,h2,h3,h4,h5,h6{font-family:'CustomFont','Segoe UI','Microsoft YaHei',sans-serif !important;}</style>"
+  "allHead": "<style>@font-face{font-family:'CustomFont';src:url('/static/fonts/AaGaiShiKeAiTianTianQuan-2.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}body{font-family:'CustomFont','Segoe UI','Microsoft YaHei',sans-serif !important;}h1,h2,h3,h4,h5,h6{font-family:'CustomFont','Segoe UI','Microsoft YaHei',sans-serif !important;}</style><script src='/static/gmeek/GmeekTOC.js'></script><script src='/static/gmeek/GmeekVercount.js'></script><script src='/static/gmeek/lightbox.js'></script>"
 }
