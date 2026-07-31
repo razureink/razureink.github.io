@@ -15,12 +15,27 @@
     {
       "name": "个人主页",
       "desc": "这个网站本身",
-      "link": "https://github.com/razureink"
+      "link": "https://github.com/razureink/razureink.github.io"
     },
     {
       "name": "MonPanel",
       "desc": "一个普普通通的linux系统管理面板口牙",
-      "link": "https://github.com/razureink"
+      "link": "http://nbpanel.ccccocccc.cc/"
+    },
+    {
+      "name": "RazureCore",
+      "desc": "Kotlin 项目",
+      "link": "https://github.com/razureink/RazureCore"
+    },
+    {
+      "name": "Arisu",
+      "desc": "Go 项目",
+      "link": "https://github.com/razureink/Arisu"
+    },
+    {
+      "name": "OptimizationTPS",
+      "desc": "Java 项目",
+      "link": "https://github.com/razureink/OptimizationTPS"
     }
   ],
   "github_link": "https://github.com/razureink",
@@ -69,6 +84,10 @@
     {
       "title": "别当欧尼酱了",
       "cover": "https://media.kitsu.app/anime/46077/poster_image/398a69d3fb266c7989de84e4abdc84ab.jpg"
+    },
+    {
+      "title": "转生为勇者的肋骨",
+      "cover": "https://media.kitsu.app/anime/50642/poster_image/e716174687331af3128012ac8b8592ed.jpg"
     }
   ],
   "tags_from_others": [
@@ -125,40 +144,6 @@
     }
   ],
   "blog_enabled": true,
-  "blog_posts": [
-    {
-      "id": 1,
-      "title": "你好世界",
-      "content": "print('Hello World!')",
-      "category": "技术",
-      "summary": "Hello,World!",
-      "date": "2026-03-08"
-    },
-    {
-      "id": 2,
-      "title": "-webkit-text-stroke令人忍俊不禁",
-      "content": "诶我靠用上这个-webkit-text-stroke以后代码量变低了，维护难度低了，复杂程度低了，兼容性也低了😂",
-      "category": "技术",
-      "summary": "-webkit-text-stroke令人忍俊不禁",
-      "date": "2026-03-08"
-    },
-    {
-      "id": 3,
-      "title": "此网站的更新日志",
-      "content": "1.6beta2 增加网页上传",
-      "category": "技术",
-      "summary": "更新日志罢了",
-      "date": "2026-03-10"
-    },
-    {
-      "id": 4,
-      "title": "RazureSoft统一通行证接入文档",
-      "content": "RazureSoft 统一通行证完整接入指南（基于Python）",
-      "category": "技术",
-      "summary": "RazureSoft统一通行证接入文档 基于Python",
-      "date": "2026-03-22"
-    }
-  ],
   "name_display": "青墨雨",
   "font_settings": {
     "enabled": true,

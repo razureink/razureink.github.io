@@ -653,11 +653,11 @@ body {
             </div>
             {% endif %}
 
-            <!-- 我的项目 -->
+            <!-- 我的项目（动态从 GitHub 获取，失败时回退静态数据） -->
             <div class="glass-card">
                 <h2 class="section-title">🚀 我的项目</h2>
-                <div class="projects-grid">
-                    {% for project in data.projects %}
+                <div class="projects-grid" id="projects-grid">
+                    {% for project in data.get('projects', []) %}
                     <a href="{{ project.link }}" class="project-card" target="_blank">
                         <div class="project-name">{{ project.name }}</div>
                         <div class="project-desc">{{ project.desc }}</div>
@@ -700,22 +700,11 @@ body {
             </div>
             {% endif %}
 
-            <!-- 博客最新文章预览（优先读取 Gmeek 的 postList.json，失败时回退到静态数据） -->
+            <!-- 博客最新文章预览（内容从 Gmeek 的 postList.json 获取） -->
             {% if data.get('blog_enabled', true) %}
             <div class="glass-card">
                 <h2 class="section-title">📝 最新博客</h2>
-                <div id="blog-posts" style="display: flex; flex-direction: column; gap: 15px;">
-                    {% for post in data.get('blog_posts', [])[:5] %}
-                    <a href="/blog" style="text-decoration: none; color: inherit; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.05); transition: 0.3s;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <div style="font-weight: bold; color: #fff;">{{ post.title }}</div>
-                                <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">{{ post.date }}</div>
-                            </div>
-                            <div style="color: rgba(255,255,255,0.4);">阅读 →</div>
-                        </div>
-                    </a>
-                    {% endfor %}
+                <div id="blog-posts" style="display: flex; flex-direction: column; gap: 15px;"></div>
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <a href="/blog" class="feature-btn" style="display: inline-block;">进入博客 →</a>
@@ -911,7 +900,19 @@ body {
             }
         }, 5000);
 
-        // ========== 博客列表：从 Gmeek 的 postList.json 读取，失败时保留静态回退 ==========
+        // ========== 博客列表：从 Gmeek 的 postList.json 获取 ==========
+        function showBlogMessage(text) {
+            const container = document.getElementById('blog-posts');
+            if (!container) return;
+            container.innerHTML = '';
+            const div = document.createElement('div');
+            div.style.color = 'rgba(255,255,255,0.6)';
+            div.style.textAlign = 'center';
+            div.style.padding = '15px';
+            div.textContent = text;
+            container.appendChild(div);
+        }
+
         function loadBlogPosts() {
             fetch('/blog/postList.json')
                 .then(response => {
@@ -925,7 +926,10 @@ body {
                             posts.push(data[key]);
                         }
                     }
-                    if (posts.length === 0) return;
+                    if (posts.length === 0) {
+                        showBlogMessage('暂无文章，敬请期待');
+                        return;
+                    }
                     posts.sort((a, b) => (b.createdDate || '').localeCompare(a.createdDate || ''));
                     
                     const container = document.getElementById('blog-posts');
@@ -971,10 +975,56 @@ body {
                     });
                 })
                 .catch(err => {
-                    console.log('读取 Gmeek 博客列表失败，使用静态回退:', err);
+                    console.log('读取 Gmeek 博客列表失败:', err);
+                    showBlogMessage('博客列表加载失败，请稍后再试');
                 });
         }
         loadBlogPosts();
+
+        // ========== 我的项目：从 GitHub API 获取真实仓库，失败时回退静态数据 ==========
+        function loadGitHubProjects() {
+            fetch('https://api.github.com/users/razureink/repos?sort=updated&per_page=100')
+                .then(response => {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.json();
+                })
+                .then(repos => {
+                    const own = repos.filter(r => !r.fork && r.name !== 'razureink.github.io' && r.name !== 'razureink')
+                        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                        .slice(0, 8);
+                    if (own.length === 0) return;
+                    
+                    const grid = document.getElementById('projects-grid');
+                    if (!grid) return;
+                    
+                    grid.innerHTML = '';
+                    own.forEach(repo => {
+                        const card = document.createElement('a');
+                        card.href = repo.html_url;
+                        card.target = '_blank';
+                        card.className = 'project-card';
+                        
+                        const name = document.createElement('div');
+                        name.className = 'project-name';
+                        name.textContent = repo.name;
+                        
+                        const desc = document.createElement('div');
+                        desc.className = 'project-desc';
+                        desc.textContent = repo.description || repo.language || 'GitHub 仓库';
+                        if (repo.stargazers_count > 0) {
+                            desc.textContent += '  ⭐' + repo.stargazers_count;
+                        }
+                        
+                        card.appendChild(name);
+                        card.appendChild(desc);
+                        grid.appendChild(card);
+                    });
+                })
+                .catch(err => {
+                    console.log('获取 GitHub 项目失败，使用静态回退:', err);
+                });
+        }
+        loadGitHubProjects();
 
         // ========== 主站功能 ==========
         let cialloCount = localStorage.getItem('cialloCount') ? parseInt(localStorage.getItem('cialloCount')) : 0;
