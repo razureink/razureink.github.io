@@ -555,6 +555,10 @@ body {
 }
 </style>
 
+<!-- 网易云歌单播放器（APlayer + Meting API） -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="/static/gmeek/netease-player.js"></script>
 </head>
 <body>
     <!-- 加载进度条 -->
@@ -591,7 +595,7 @@ body {
             <div class="glass-card hero">
                 <div class="avatar-container">
                     
-                    <div class="avatar-placeholder">👤</div>
+                    <img src="https://github.com/razureink.png" alt="头像">
                     
                 </div>
                 <h1 class="typing-text" id="typing-text" onclick="handleCialloClick()"></h1>
@@ -1128,15 +1132,15 @@ body {
                 })
                 .then(repos => {
                     const own = repos.filter(r => !r.fork && r.name !== 'razureink.github.io' && r.name !== 'razureink')
-                        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-                        .slice(0, 8);
+                        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
                     if (own.length === 0) return;
                     
                     const grid = document.getElementById('projects-grid');
                     if (!grid) return;
                     
                     grid.innerHTML = '';
-                    own.forEach(repo => {
+                    const shown = own.slice(0, 8);
+                    shown.forEach(repo => {
                         const card = document.createElement('a');
                         card.href = repo.html_url;
                         card.target = '_blank';
@@ -1157,6 +1161,29 @@ body {
                         card.appendChild(desc);
                         grid.appendChild(card);
                     });
+                    
+                    if (own.length > shown.length) {
+                        const more = document.createElement('a');
+                        more.href = 'https://github.com/razureink';
+                        more.target = '_blank';
+                        more.className = 'project-card';
+                        more.style.display = 'flex';
+                        more.style.flexDirection = 'column';
+                        more.style.alignItems = 'center';
+                        more.style.justifyContent = 'center';
+                        
+                        const moreName = document.createElement('div');
+                        moreName.className = 'project-name';
+                        moreName.textContent = '+' + (own.length - shown.length);
+                        
+                        const moreDesc = document.createElement('div');
+                        moreDesc.className = 'project-desc';
+                        moreDesc.textContent = '还有 ' + (own.length - shown.length) + ' 个项目未展示';
+                        
+                        more.appendChild(moreName);
+                        more.appendChild(moreDesc);
+                        grid.appendChild(more);
+                    }
                 })
                 .catch(err => {
                     console.log('获取 GitHub 项目失败，使用静态回退:', err);
