@@ -18,11 +18,6 @@
       "link": "https://github.com/razureink/razureink.github.io"
     },
     {
-      "name": "MonPanel",
-      "desc": "一个普普通通的linux系统管理面板口牙",
-      "link": "http://nbpanel.ccccocccc.cc/"
-    },
-    {
       "name": "RazureCore",
       "desc": "Kotlin 项目",
       "link": "https://github.com/razureink/RazureCore"
@@ -47,12 +42,7 @@
   "background_opacity": 0.4,
   "avatar": null,
   "footer_html": "",
-  "friend_links": [
-    {
-      "name": "monpanel",
-      "url": "http://nbpanel.ccccocccc.cc/"
-    }
-  ],
+  "friend_links": [],
   "wechat_qr": "wechat_20260307_134618.jpg",
   "qq_qr": null,
   "favicon": "https://github.com/razureink.png",
