@@ -19,8 +19,10 @@
             lrc: s.lrc || ''
           };
         });
+        var container = document.createElement('div');
+        document.body.appendChild(container);
         window.neteasePlayer = new APlayer({
-          container: document.body,
+          container: container,
           fixed: true,
           autoplay: false,
           listmaxheight: '340px',
