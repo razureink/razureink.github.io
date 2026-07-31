@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>青墨雨</title>
     
-    <link rel="icon" href="data:,">
+    <link rel="icon" href="https://github.com/razureink.png" type="image/x-icon">
     
     <!-- 加载动画需要的字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             min-height: 100vh;
             
-            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&amp;q=80') no-repeat center center fixed;
+            background: url('/static/uploads/bg_20260316_234954.jpg') no-repeat center center fixed;
             
             background-size: cover;
             position: relative;
@@ -248,161 +248,6 @@
             z-index: 10001;
         }
 
-/* ========== 第二段动画样式（方法一 -webkit-text-stroke）========== */
-.splash-screen-second {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #ffffff;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9998;
-    transition: opacity 0.8s ease-out;
-    font-family: 'Kosugi Maru', 'Zen Maru Gothic', 'M PLUS Rounded 1c', 'Noto Serif JP', sans-serif;
-    cursor: pointer;
-}
-
-.splash-screen-second.fade-out {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.splash-container-second {
-    text-align: center;
-    position: relative;
-    padding: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* 日文字体 - 超大倾斜 */
-.japanese-text-wrapper {
-    font-size: clamp(60px, 16vw, 140px);
-    font-weight: 900;
-    letter-spacing: -2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: -5px;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    margin-bottom: 30px;
-}
-
-/* 每个字母 - 使用 -webkit-text-stroke 实现干净黑边 */
-.japanese-letter {
-    display: inline-block;
-    opacity: 0;
-    animation: smoothJump 0.9s cubic-bezier(0.2, 1.5, 0.3, 1) forwards;
-    will-change: transform, opacity;
-    font-weight: 900;
-    -webkit-text-stroke: 4px black;  /* 干净的黑边 */
-    paint-order: stroke fill;  /* 先描边后填充 */
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);  /* 淡淡的白光 */
-}
-
-/* 每个字母独立控制 - 超大倾斜角度 */
-.japanese-letter:nth-child(1) { 
-    animation-delay: 0.00s; 
-    color: #FF6B6B;
-    font-size: 1.3em;
-    transform: rotate(-18deg);
-}
-.japanese-letter:nth-child(2) { 
-    animation-delay: 0.10s; 
-    color: #4ECDC4;
-    font-size: 0.9em;
-    transform: rotate(16deg);
-}
-.japanese-letter:nth-child(3) { 
-    animation-delay: 0.20s; 
-    color: #FFD93D;
-    font-size: 1.2em;
-    transform: rotate(-20deg);
-}
-.japanese-letter:nth-child(4) { 
-    animation-delay: 0.30s; 
-    color: #6BCB77;
-    font-size: 0.8em;
-    transform: rotate(17deg);
-}
-.japanese-letter:nth-child(5) { 
-    animation-delay: 0.40s; 
-    color: #FF9F6E;
-    font-size: 1.3em;
-    transform: rotate(-19deg);
-}
-.japanese-letter:nth-child(6) { 
-    animation-delay: 0.50s; 
-    color: #A890FE;
-    font-size: 0.9em;
-    transform: rotate(18deg);
-}
-
-/* 流畅的跳入动画 */
-@keyframes smoothJump {
-    0% {
-        opacity: 0;
-        transform: translateY(100px) scale(0.3) rotate(0deg);
-    }
-    30% {
-        opacity: 1;
-        transform: translateY(-25px) scale(1.3) rotate(10deg);
-    }
-    55% {
-        transform: translateY(8px) scale(1.1) rotate(-3deg);
-    }
-    75% {
-        transform: translateY(-3px) scale(1.02) rotate(1deg);
-    }
-    90% {
-        transform: translateY(1px) scale(0.99) rotate(-0.5deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotate(var(--final-rotate, 0deg));
-    }
-}
-
-/* 最终旋转角度 */
-.japanese-letter:nth-child(1) { --final-rotate: -18deg; }
-.japanese-letter:nth-child(2) { --final-rotate: 16deg; }
-.japanese-letter:nth-child(3) { --final-rotate: -20deg; }
-.japanese-letter:nth-child(4) { --final-rotate: 17deg; }
-.japanese-letter:nth-child(5) { --final-rotate: -19deg; }
-.japanese-letter:nth-child(6) { --final-rotate: 18deg; }
-
-/* 副标题 - RAZURESOFT */
-.japanese-subtitle {
-    font-size: clamp(18px, 4vw, 32px);
-    color: #333333;
-    margin-top: 30px;
-    letter-spacing: 8px;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease 0.9s forwards;
-    font-family: 'Kosugi Maru', 'Zen Maru Gothic', 'M PLUS Rounded 1c', cursive;
-    font-weight: 900;
-    text-transform: uppercase;
-    -webkit-text-stroke: 1px white;
-    paint-order: stroke fill;
-    text-shadow: 2px 2px 0 rgba(255,255,255,0.8);
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
         /* ========== 主站内容 ========== */
         .main-content {
             opacity: 0;
@@ -589,6 +434,76 @@
             padding: 0 5px;
         }
 
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 20px;
+        }
+        .tech-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 20px 10px;
+            transition: all 0.3s ease;
+        }
+        .tech-item:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        .tech-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 14px;
+            padding: 8px;
+            overflow: hidden;
+        }
+        .tech-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .tech-name {
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            margin-left: 15px;
+        }
+        .github-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .github-btn {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+
         @media (max-width: 768px) { 
             .showcase-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -608,10 +523,6 @@
                 font-size: 24px;
                 letter-spacing: 12px;
             }
-            .japanese-subtitle {
-                font-size: 16px;
-                letter-spacing: 3px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -622,12 +533,27 @@
             .showcase-title {
                 font-size: 0.85em;
             }
-            .japanese-subtitle {
-                font-size: 14px;
-            }
         }
     </style>
 
+
+<style>
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/static/fonts/AaGaiShiKeAiTianTianQuan-2.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+body {
+    font-family: 'CustomFont', 'Segoe UI', 'Microsoft YaHei', sans-serif !important;
+    
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: normal;
+    
+}
+</style>
 
 </head>
 <body>
@@ -652,28 +578,12 @@
         <div class="splash-skip-hint" id="skipHint">点击加速进入 →</div>
     </div>
     
-<!-- 第二段动画页面（方法一版） -->
-<div class="splash-screen-second" id="splashScreenSecond">
-    <div class="splash-container-second">
-        <div class="japanese-text-wrapper">
-            <span class="japanese-letter">ラ</span>
-            <span class="japanese-letter">ズ</span>
-            <span class="japanese-letter">レ</span>
-            <span class="japanese-letter">ソ</span>
-            <span class="japanese-letter">フ</span>
-            <span class="japanese-letter">ト</span>
-        </div>
-        <p class="japanese-subtitle">RAZURESOFT</p>
-    </div>
-</div>
-    
     <!-- 背景模糊层 -->
     <div class="background-overlay"></div>
     
     <!-- 主站内容 -->
     <div class="main-content" id="mainContent">
         <!-- 音频播放器 -->
-        <audio id="intro-voice" preload="auto" style="display: none;"></audio>
         <audio id="bg-music" loop style="display: none;"></audio>
         
         <div class="container">
@@ -804,61 +714,93 @@
                 <h2 class="section-title">🚀 我的项目</h2>
                 <div class="projects-grid">
                     
-                    <a href="#" class="project-card" target="_blank">
+                    <a href="https://github.com/razureink" class="project-card" target="_blank">
                         <div class="project-name">个人主页</div>
                         <div class="project-desc">这个网站本身</div>
                     </a>
                     
-                    <a href="http://nbpanel.ccccocccc.cc/" class="project-card" target="_blank">
+                    <a href="https://github.com/razureink" class="project-card" target="_blank">
                         <div class="project-name">MonPanel</div>
                         <div class="project-desc">一个普普通通的linux系统管理面板口牙</div>
                     </a>
                     
-                    <a href="http://icp.razure.ink/" class="project-card" target="_blank">
-                        <div class="project-name">樱ICP备案</div>
-                        <div class="project-desc">一个类似于备案的地方</div>
-                    </a>
-                    
                 </div>
             </div>
 
-            <!-- 书籍展示柜 -->
+            <!-- 技术栈 -->
             
             <div class="glass-card">
-                <h2 class="section-title">📚 我喜欢的书籍</h2>
-                <div class="showcase-grid">
+                <h2 class="section-title">💻 我的技术栈</h2>
+                <div class="tech-grid">
                     
-                    <div class="showcase-item">
-                        <div class="showcase-cover book-cover">
-                            
-                            <img src="https://via.placeholder.com/400x600/2a5298/ffffff?text=%E4%B8%89%E4%BD%93" alt="三体" loading="lazy">
-                            
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy">
                         </div>
-                        <div class="showcase-title">三体</div>
-                        
-                        <div class="showcase-author">刘慈欣</div>
-                        
+                        <div class="tech-name">Java</div>
                     </div>
                     
-                    <div class="showcase-item">
-                        <div class="showcase-cover book-cover">
-                            
-                            <img src="https://via.placeholder.com/400x600/2a5298/ffffff?text=%E8%A1%A5%E8%8D%AF" alt="补药啊，病娇校花别追我了" loading="lazy">
-                            
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" loading="lazy">
                         </div>
-                        <div class="showcase-title">补药啊，病娇校花别追我了</div>
-                        
+                        <div class="tech-name">Python</div>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg" alt="Golang" loading="lazy">
+                        </div>
+                        <div class="tech-name">Golang</div>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" alt="Kotlin" loading="lazy">
+                        </div>
+                        <div class="tech-name">Kotlin</div>
                     </div>
                     
                 </div>
             </div>
             
 
-            <!-- 博客最新文章预览 -->
+            <!-- 常用 IDE -->
+            
+            <div class="glass-card">
+                <h2 class="section-title">🛠️ 常用 IDE</h2>
+                <div class="tech-grid">
+                    
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" alt="IntelliJ IDEA" loading="lazy">
+                        </div>
+                        <div class="tech-name">IntelliJ IDEA</div>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pycharm/pycharm-original.svg" alt="PyCharm" loading="lazy">
+                        </div>
+                        <div class="tech-name">PyCharm</div>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code" loading="lazy">
+                        </div>
+                        <div class="tech-name">VS Code</div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+            <!-- 博客最新文章预览（优先读取 Gmeek 的 postList.json，失败时回退到静态数据） -->
             
             <div class="glass-card">
                 <h2 class="section-title">📝 最新博客</h2>
-                <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div id="blog-posts" style="display: flex; flex-direction: column; gap: 15px;">
                     
                     <a href="/blog" style="text-decoration: none; color: inherit; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.05); transition: 0.3s;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -901,26 +843,8 @@
                     </a>
                     
                 </div>
-                
-            </div>
-            
-
-            <!-- 音乐展示柜 -->
-            
-            <div class="glass-card">
-                <h2 class="section-title">🎵 我喜欢的音乐</h2>
-                <div class="showcase-grid">
-                    
-                    <div class="showcase-item">
-                        <div class="showcase-cover">
-                            
-                            <img src="https://via.placeholder.com/500x500/2a5298/ffffff?text=cu" alt="cure for me" loading="lazy">
-                            
-                        </div>
-                        <div class="showcase-title">cure for me</div>
-                        
-                    </div>
-                    
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="/blog" class="feature-btn" style="display: inline-block;">进入博客 →</a>
                 </div>
             </div>
             
@@ -934,7 +858,7 @@
                     <div class="showcase-item">
                         <div class="showcase-cover anime-cover">
                             
-                            <img src="http://lain.bgm.tv/pic/cover/l/bb/56/333623_OLySB.jpg" alt="创之界限" loading="lazy">
+                            <img src="https://media.kitsu.app/anime/poster_images/44425/original.png" alt="创之界限" loading="lazy">
                             
                         </div>
                         <div class="showcase-title">创之界限</div>
@@ -943,7 +867,7 @@
                     <div class="showcase-item">
                         <div class="showcase-cover anime-cover">
                             
-                            <img src="http://lain.bgm.tv/pic/cover/l/c8/bd/333624_Z0E8G.jpg" alt="创之界限2" loading="lazy">
+                            <img src="https://media.kitsu.app/anime/poster_images/44426/original.jpg" alt="创之界限2" loading="lazy">
                             
                         </div>
                         <div class="showcase-title">创之界限2</div>
@@ -952,7 +876,7 @@
                     <div class="showcase-item">
                         <div class="showcase-cover anime-cover">
                             
-                            <img src="http://lain.bgm.tv/pic/cover/l/94/8e/416777_xcDCg.jpg" alt="蔚蓝档案动画版" loading="lazy">
+                            <img src="https://media.kitsu.app/anime/47075/poster_image/8ccbcbf5be6d660c83f3bf67c1422a22.jpg" alt="蔚蓝档案动画版" loading="lazy">
                             
                         </div>
                         <div class="showcase-title">蔚蓝档案动画版</div>
@@ -961,7 +885,7 @@
                     <div class="showcase-item">
                         <div class="showcase-cover anime-cover">
                             
-                            <img src="http://lain.bgm.tv/pic/cover/l/7c/8e/424883_5X5X2.jpg" alt="不时用俄语小声说真心话的邻桌艾莉同学" loading="lazy">
+                            <img src="https://media.kitsu.app/anime/47192/poster_image/8a4732722229b2290e71675216ffd8d0.jpg" alt="不时用俄语小声说真心话的邻桌艾莉同学" loading="lazy">
                             
                         </div>
                         <div class="showcase-title">不时用俄语小声说真心话的邻桌艾莉同学</div>
@@ -970,7 +894,7 @@
                     <div class="showcase-item">
                         <div class="showcase-cover anime-cover">
                             
-                            <img src="http://lain.bgm.tv/pic/cover/l/6e/01/7157_hF46A.jpg" alt="缘之空" loading="lazy">
+                            <img src="https://media.kitsu.app/anime/poster_images/5513/original.jpg" alt="缘之空" loading="lazy">
                             
                         </div>
                         <div class="showcase-title">缘之空</div>
@@ -979,7 +903,7 @@
                     <div class="showcase-item">
                         <div class="showcase-cover anime-cover">
                             
-                            <img src="http://lain.bgm.tv/pic/cover/l/7e/ca/378862_24TnR.jpg" alt="别当欧尼酱了" loading="lazy">
+                            <img src="https://media.kitsu.app/anime/46077/poster_image/398a69d3fb266c7989de84e4abdc84ab.jpg" alt="别当欧尼酱了" loading="lazy">
                             
                         </div>
                         <div class="showcase-title">别当欧尼酱了</div>
@@ -991,6 +915,21 @@
 
             <!-- 社交二维码 -->
             
+            <div class="glass-card social-section">
+                <h2 class="section-title" style="border: none;">📱 加我好友</h2>
+                <div class="social-grid">
+                    
+                    <div class="social-item">
+                        <div class="social-qr">
+                            <img src="/static/uploads/wechat_20260307_134618.jpg" alt="微信二维码">
+                        </div>
+                        <div class="social-label">微信</div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
 
             <!-- 友情链接 -->
             
@@ -999,8 +938,6 @@
                 <div class="friend-links">
                     
                     <a href="http://nbpanel.ccccocccc.cc/" class="friend-link" target="_blank">monpanel</a>
-                    
-                    <a href="http://icp.razure.ink/" class="friend-link" target="_blank">樱ICP备案</a>
                     
                 </div>
             </div>
@@ -1015,23 +952,25 @@
                     </svg>
                     访问我的B站空间
                 </a>
+                
+                <a href="https://github.com/razureink" class="github-btn" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/>
+                    </svg>
+                    访问我的GitHub
+                </a>
+                
             </div>
 
             <!-- 底部备案信息 -->
-            
-            <div class="footer">
-                <a href="http://icp.razure.ink/icp?keyword=20260721" target="_blank">樱ICP备 20260721 号</a>
-            </div>
             
         </div>
     </div>
 
     <script>
         // ========== 音频文件列表（构建时由 build.py 注入）==========
-        const VOICE_FILES = ["-_.mp3", "08.mp3", "WC.mp3", "nnciallo.mp3"];
         const MUSIC_FILES = ["-_.mp3", "08.mp3", "WC.mp3", "nnciallo.mp3"];
         
-        console.log('找到语音文件:', VOICE_FILES);
         console.log('找到音乐文件:', MUSIC_FILES);
 
         // 从列表中随机选一个
@@ -1042,14 +981,11 @@
 
         // ========== 加载动画控制 ==========
         let fadeOutStarted = false;
-        let secondSplashVisible = false;
         
         const splashScreen = document.getElementById('splashScreen');
-        const splashScreenSecond = document.getElementById('splashScreenSecond');
         const mainContent = document.getElementById('mainContent');
         const skipHint = document.getElementById('skipHint');
         const progressBar = document.getElementById('progressBar');
-        const introVoice = document.getElementById('intro-voice');
         
         // 模拟加载进度
         let progress = 0;
@@ -1061,7 +997,7 @@
                     clearInterval(progressInterval);
                     setTimeout(() => {
                         if (!fadeOutStarted) {
-                            fadeOutAndShowSecond();
+                            enterSite();
                         }
                     }, 500);
                 }
@@ -1069,7 +1005,7 @@
             }
         }, 200);
 
-        // 点击加速进入第一段
+        // 点击加速进入
         function accelerateAndEnter() {
             if (fadeOutStarted) return;
             
@@ -1077,11 +1013,11 @@
             splashContainer.style.animation = 'none';
             splashContainer.style.opacity = '1';
             
-            fadeOutAndShowSecond();
+            enterSite();
         }
 
-        // 第一段动画淡出，显示第二段动画
-        function fadeOutAndShowSecond() {
+        // 动画淡出并显示主站
+        function enterSite() {
             if (fadeOutStarted) return;
             fadeOutStarted = true;
             
@@ -1092,46 +1028,14 @@
             
             setTimeout(() => {
                 splashScreen.style.display = 'none';
-                splashScreenSecond.style.display = 'flex';
-                secondSplashVisible = true;
+                mainContent.classList.add('visible');
                 
-                // 进入第二动画立即播放语音
-                const selectedVoice = pickRandom(VOICE_FILES);
-                if (selectedVoice) {
-                    console.log('播放语音:', selectedVoice);
-                    
-                    if (introVoice) {
-                        introVoice.src = '/static/music/' + selectedVoice;
-                        introVoice.load();
-                        
-                        // 立即尝试播放
-                        let playPromise = introVoice.play();
-                        if (playPromise !== undefined) {
-                            playPromise.catch(error => {
-                                console.log('自动播放被阻止，等待用户首次点击:', error);
-                                // 如果自动播放被阻止，等待用户点击第一屏
-                                splashScreenSecond.addEventListener('click', function playOnFirstClick() {
-                                    introVoice.play();
-                                    splashScreenSecond.removeEventListener('click', playOnFirstClick);
-                                }, {once: true});
-                            });
-                        }
-                    }
-                }
+                // 启动主站的打字效果
+                setTimeout(typeWriter, 500);
                 
-                // 语音播放结束后自动关闭
-                introVoice.onended = function() {
-                    console.log('语音播放结束，自动关闭');
-                    closeSecondSplash();
-                };
-                
+                // 播放背景音乐
+                playRandomMusic();
             }, 800);
-        }
-
-        // 点击第二段动画直接关闭
-        function handleSecondSplashClick() {
-            console.log('点击关闭第二动画');
-            closeSecondSplash();
         }
 
         // 播放一首随机音乐（前端实现，替代原后端 /api/play-once）
@@ -1154,42 +1058,81 @@
             });
         }
 
-        // 关闭第二段动画并显示主站
-        function closeSecondSplash() {
-            if (!secondSplashVisible) return;
-            
-            // 停止正在播放的语音
-            if (introVoice && !introVoice.paused) {
-                introVoice.pause();
-                introVoice.currentTime = 0;
-            }
-            
-            splashScreenSecond.classList.add('fade-out');
-            
-            setTimeout(() => {
-                splashScreenSecond.style.display = 'none';
-                mainContent.classList.add('visible');
-                secondSplashVisible = false;
-                
-                // 启动主站的打字效果
-                setTimeout(typeWriter, 500);
-                
-                // 播放背景音乐
-                playRandomMusic();
-            }, 800);
-        }
-
         // 点击事件
         splashScreen.addEventListener('click', accelerateAndEnter);
         skipHint.addEventListener('click', accelerateAndEnter);
-        splashScreenSecond.addEventListener('click', handleSecondSplashClick);  // 点击任意位置关闭
 
-        // 设置自动进入时间（5秒后自动进入第一段结束）
+        // 设置自动进入时间（5秒后自动进入）
         setTimeout(() => {
             if (!fadeOutStarted) {
-                fadeOutAndShowSecond();
+                enterSite();
             }
         }, 5000);
+
+        // ========== 博客列表：从 Gmeek 的 postList.json 读取，失败时保留静态回退 ==========
+        function loadBlogPosts() {
+            fetch('/blog/postList.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    const posts = [];
+                    for (const key in data) {
+                        if (key.startsWith('P') && data[key] && data[key].postTitle) {
+                            posts.push(data[key]);
+                        }
+                    }
+                    if (posts.length === 0) return;
+                    posts.sort((a, b) => (b.createdDate || '').localeCompare(a.createdDate || ''));
+                    
+                    const container = document.getElementById('blog-posts');
+                    if (!container) return;
+                    
+                    container.innerHTML = '';
+                    posts.slice(0, 5).forEach(post => {
+                        const url = '/blog/' + (post.postUrl || '');
+                        const card = document.createElement('a');
+                        card.href = url;
+                        card.style.textDecoration = 'none';
+                        card.style.color = 'inherit';
+                        card.style.padding = '10px';
+                        card.style.borderRadius = '12px';
+                        card.style.background = 'rgba(255,255,255,0.05)';
+                        card.style.transition = '0.3s';
+                        
+                        const flex = document.createElement('div');
+                        flex.style.display = 'flex';
+                        flex.style.justifyContent = 'space-between';
+                        flex.style.alignItems = 'center';
+                        
+                        const left = document.createElement('div');
+                        const title = document.createElement('div');
+                        title.style.fontWeight = 'bold';
+                        title.style.color = '#fff';
+                        title.textContent = post.postTitle;
+                        const date = document.createElement('div');
+                        date.style.color = 'rgba(255,255,255,0.6)';
+                        date.style.fontSize = '0.85em';
+                        date.textContent = post.createdDate || '';
+                        left.appendChild(title);
+                        left.appendChild(date);
+                        
+                        const arrow = document.createElement('div');
+                        arrow.style.color = 'rgba(255,255,255,0.4)';
+                        arrow.textContent = '阅读 →';
+                        
+                        flex.appendChild(left);
+                        flex.appendChild(arrow);
+                        card.appendChild(flex);
+                        container.appendChild(card);
+                    });
+                })
+                .catch(err => {
+                    console.log('读取 Gmeek 博客列表失败，使用静态回退:', err);
+                });
+        }
+        loadBlogPosts();
 
         // ========== 主站功能 ==========
         let cialloCount = localStorage.getItem('cialloCount') ? parseInt(localStorage.getItem('cialloCount')) : 0;

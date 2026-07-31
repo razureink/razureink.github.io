@@ -15,74 +15,60 @@
     {
       "name": "个人主页",
       "desc": "这个网站本身",
-      "link": "#"
+      "link": "https://github.com/razureink"
     },
     {
       "name": "MonPanel",
       "desc": "一个普普通通的linux系统管理面板口牙",
-      "link": "http://nbpanel.ccccocccc.cc/"
-    },
-    {
-      "name": "樱ICP备案",
-      "desc": "一个类似于备案的地方",
-      "link": "http://icp.razure.ink/"
+      "link": "https://github.com/razureink"
     }
   ],
+  "github_link": "https://github.com/razureink",
   "bilibili_link": "https://space.bilibili.com/3537115719665899?spm_id_from=333.337.0.0",
-  "background_type": "url",
+  "background_type": "local",
   "background_url": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80",
-  "background_local": null,
+  "background_local": "bg_20260316_234954.jpg",
   "background_blur": true,
   "background_opacity": 0.4,
   "avatar": null,
-  "footer_html": "<a href=\"http://icp.razure.ink/icp?keyword=20260721\" target=\"_blank\">樱ICP备 20260721 号</a>",
+  "footer_html": "",
   "friend_links": [
     {
       "name": "monpanel",
       "url": "http://nbpanel.ccccocccc.cc/"
-    },
-    {
-      "name": "樱ICP备案",
-      "url": "http://icp.razure.ink/"
     }
   ],
-  "wechat_qr": null,
+  "wechat_qr": "wechat_20260307_134618.jpg",
   "qq_qr": null,
-  "favicon": null,
+  "favicon": "https://github.com/razureink.png",
   "notebook_enabled": false,
-  "music_enabled": true,
+  "music_enabled": false,
   "anime_enabled": true,
-  "music_items": [
-    {
-      "title": "cure for me",
-      "artist": "",
-      "cover": "https://via.placeholder.com/500x500/2a5298/ffffff?text=cu"
-    }
-  ],
+  "music_items": [],
   "anime_items": [
     {
       "title": "创之界限",
-      "cover": "http://lain.bgm.tv/pic/cover/l/bb/56/333623_OLySB.jpg"
+      "cover": "https://media.kitsu.app/anime/poster_images/44425/original.png"
     },
     {
       "title": "创之界限2",
-      "cover": "http://lain.bgm.tv/pic/cover/l/c8/bd/333624_Z0E8G.jpg"
+      "cover": "https://media.kitsu.app/anime/poster_images/44426/original.jpg"
     },
     {
       "title": "蔚蓝档案动画版",
-      "cover": "http://lain.bgm.tv/pic/cover/l/94/8e/416777_xcDCg.jpg"
+      "cover": "https://media.kitsu.app/anime/47075/poster_image/8ccbcbf5be6d660c83f3bf67c1422a22.jpg"
     },
     {
       "title": "不时用俄语小声说真心话的邻桌艾莉同学",
-      "cover": "http://lain.bgm.tv/pic/cover/l/7c/8e/424883_5X5X2.jpg"
+      "cover": "https://media.kitsu.app/anime/47192/poster_image/8a4732722229b2290e71675216ffd8d0.jpg"
     },
     {
       "title": "缘之空",
-      "cover": "http://lain.bgm.tv/pic/cover/l/6e/01/7157_hF46A.jpg"
+      "cover": "https://media.kitsu.app/anime/poster_images/5513/original.jpg"
     },
     {
       "title": "别当欧尼酱了",
-      "cover": "http://lain.bgm.tv/pic/cover/l/7e/ca/378862_24TnR.jpg"
+      "cover": "https://media.kitsu.app/anime/46077/poster_image/398a69d3fb266c7989de84e4abdc84ab.jpg"
     }
   ],
   "tags_from_others": [
@@ -104,29 +90,38 @@
   ],
   "theme": "default",
   "custom_css": "",
-  "books_enabled": true,
-  "book_items": [
+  "books_enabled": false,
+  "book_items": [],
+  "tech_stack": [
     {
-      "id": 1,
-      "title": "三体",
-      "author": "刘慈欣",
-      "description": "",
-      "type": "novel",
-      "url": "",
-      "cover": "https://via.placeholder.com/400x600/2a5298/ffffff?text=%E4%B8%89%E4%BD%93",
-      "added_date": "2026-03-08",
-      "tomato_keyword": "三体"
+      "name": "Java",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
     },
     {
-      "id": 2,
-      "title": "补药啊，病娇校花别追我了",
-      "author": "",
-      "description": "",
-      "type": "novel",
-      "url": "",
-      "cover": "https://via.placeholder.com/400x600/2a5298/ffffff?text=%E8%A1%A5%E8%8D%AF",
-      "added_date": "2026-03-08",
-      "tomato_keyword": "病娇校花"
+      "name": "Python",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+    },
+    {
+      "name": "Golang",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg"
+    },
+    {
+      "name": "Kotlin",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg"
+    }
+  ],
+  "ides": [
+    {
+      "name": "IntelliJ IDEA",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg"
+    },
+    {
+      "name": "PyCharm",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pycharm/pycharm-original.svg"
+    },
+    {
+      "name": "VS Code",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg"
     }
   ],
   "blog_enabled": true,
@@ -166,11 +161,11 @@
   ],
   "name_display": "青墨雨",
   "font_settings": {
-    "enabled": false,
-    "family": "system",
-    "custom_font": null,
+    "enabled": true,
+    "family": "custom",
+    "custom_font": "AaGaiShiKeAiTianTianQuan-2.ttf",
     "custom_font_name": null,
-    "font_weight": "normal",
+    "font_weight": "300",
     "font_style": "normal",
     "letter_spacing": "normal",
     "line_height": "1.6",
