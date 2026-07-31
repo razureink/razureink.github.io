@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>青墨雨</title>
+    
+    <link rel="icon" href="data:,">
+    
+    <!-- 加载动画需要的字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+SC:wght@300;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@300;400;700&family=Kosugi+Maru&family=Zen+Maru+Gothic:wght@300;400;700&family=M+PLUS+Rounded+1c:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            min-height: 100vh;
+            
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&amp;q=80') no-repeat center center fixed;
+            
+            background-size: cover;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 背景模糊和透明度控制 */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            
+            filter: blur(20px) brightness(0.7);
+            
+            opacity: 0.4;
+            z-index: -1;
+            transform: scale(1.1);
+        }
+        
+        /* 主题样式 */
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: inherit;
+            filter: blur(20px) brightness(0.7);
+            z-index: -1;
+            transform: scale(1.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+    
+        
+        /* ========== 第一段加载动画样式 ========== */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out;
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+        }
+
+        .splash-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .splash-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: splashFadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes splashFadeIn {
+            to { opacity: 1; }
+        }
+
+        .splash-title-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .splash-main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 72px;
+            font-weight: 400;
+            letter-spacing: 12px;
+            color: #1a1a1a;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: splashSlideUp 1s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .splash-main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1a1a1a, transparent);
+            animation: splashLineExpand 1.2s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes splashSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes splashLineExpand {
+            to {
+                transform: translateX(-50%) scaleX(1);
+            }
+        }
+
+        .splash-sub-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: 24px;
+            color: #4a4a4a;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: splashSlideUp 1s ease-out forwards;
+            animation-delay: 0.8s;
+            margin-top: 10px;
+        }
+
+        .splash-ink-blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(200, 200, 200, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: splashInkSpread 2s ease-out forwards;
+            animation-delay: 0.5s;
+            pointer-events: none;
+        }
+
+        @keyframes splashInkSpread {
+            to {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .splash-decoration-line {
+            position: absolute;
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #ccc, transparent);
+            opacity: 0;
+            animation: splashLineFadeIn 1.5s ease-out forwards;
+        }
+
+        .splash-decoration-line.left {
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation-delay: 1.5s;
+        }
+
+        .splash-decoration-line.right {
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation-delay: 1.5s;
+        }
+
+        @keyframes splashLineFadeIn {
+            to { opacity: 0.6; }
+        }
+
+        .splash-tagline {
+            position: absolute;
+            bottom: -80px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: #999;
+            opacity: 0;
+            animation: splashFadeIn 1s ease-out forwards;
+            animation-delay: 2s;
+        }
+
+        .splash-skip-hint {
+            position: fixed;
+            bottom: 40px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #bbb;
+            opacity: 0;
+            animation: splashFadeIn 1s ease-out forwards;
+            animation-delay: 2.5s;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10000;
+        }
+
+        .splash-skip-hint:hover {
+            color: #666;
+        }
+
+        .splash-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1a1a1a, #4a4a4a, #1a1a1a);
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 10001;
+        }
+
+/* ========== 第二段动画样式（方法一 -webkit-text-stroke）========== */
+.splash-screen-second {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+    transition: opacity 0.8s ease-out;
+    font-family: 'Kosugi Maru', 'Zen Maru Gothic', 'M PLUS Rounded 1c', 'Noto Serif JP', sans-serif;
+    cursor: pointer;
+}
+
+.splash-screen-second.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.splash-container-second {
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 日文字体 - 超大倾斜 */
+.japanese-text-wrapper {
+    font-size: clamp(60px, 16vw, 140px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: -5px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    margin-bottom: 30px;
+}
+
+/* 每个字母 - 使用 -webkit-text-stroke 实现干净黑边 */
+.japanese-letter {
+    display: inline-block;
+    opacity: 0;
+    animation: smoothJump 0.9s cubic-bezier(0.2, 1.5, 0.3, 1) forwards;
+    will-change: transform, opacity;
+    font-weight: 900;
+    -webkit-text-stroke: 4px black;  /* 干净的黑边 */
+    paint-order: stroke fill;  /* 先描边后填充 */
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);  /* 淡淡的白光 */
+}
+
+/* 每个字母独立控制 - 超大倾斜角度 */
+.japanese-letter:nth-child(1) { 
+    animation-delay: 0.00s; 
+    color: #FF6B6B;
+    font-size: 1.3em;
+    transform: rotate(-18deg);
+}
+.japanese-letter:nth-child(2) { 
+    animation-delay: 0.10s; 
+    color: #4ECDC4;
+    font-size: 0.9em;
+    transform: rotate(16deg);
+}
+.japanese-letter:nth-child(3) { 
+    animation-delay: 0.20s; 
+    color: #FFD93D;
+    font-size: 1.2em;
+    transform: rotate(-20deg);
+}
+.japanese-letter:nth-child(4) { 
+    animation-delay: 0.30s; 
+    color: #6BCB77;
+    font-size: 0.8em;
+    transform: rotate(17deg);
+}
+.japanese-letter:nth-child(5) { 
+    animation-delay: 0.40s; 
+    color: #FF9F6E;
+    font-size: 1.3em;
+    transform: rotate(-19deg);
+}
+.japanese-letter:nth-child(6) { 
+    animation-delay: 0.50s; 
+    color: #A890FE;
+    font-size: 0.9em;
+    transform: rotate(18deg);
+}
+
+/* 流畅的跳入动画 */
+@keyframes smoothJump {
+    0% {
+        opacity: 0;
+        transform: translateY(100px) scale(0.3) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(-25px) scale(1.3) rotate(10deg);
+    }
+    55% {
+        transform: translateY(8px) scale(1.1) rotate(-3deg);
+    }
+    75% {
+        transform: translateY(-3px) scale(1.02) rotate(1deg);
+    }
+    90% {
+        transform: translateY(1px) scale(0.99) rotate(-0.5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(var(--final-rotate, 0deg));
+    }
+}
+
+/* 最终旋转角度 */
+.japanese-letter:nth-child(1) { --final-rotate: -18deg; }
+.japanese-letter:nth-child(2) { --final-rotate: 16deg; }
+.japanese-letter:nth-child(3) { --final-rotate: -20deg; }
+.japanese-letter:nth-child(4) { --final-rotate: 17deg; }
+.japanese-letter:nth-child(5) { --final-rotate: -19deg; }
+.japanese-letter:nth-child(6) { --final-rotate: 18deg; }
+
+/* 副标题 - RAZURESOFT */
+.japanese-subtitle {
+    font-size: clamp(18px, 4vw, 32px);
+    color: #333333;
+    margin-top: 30px;
+    letter-spacing: 8px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.9s forwards;
+    font-family: 'Kosugi Maru', 'Zen Maru Gothic', 'M PLUS Rounded 1c', cursive;
+    font-weight: 900;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px white;
+    paint-order: stroke fill;
+    text-shadow: 2px 2px 0 rgba(255,255,255,0.8);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        /* ========== 主站内容 ========== */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+            pointer-events: none;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 1; }
+        
+        .hero { text-align: center; padding: 60px 30px; }
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
+        .avatar-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3em; color: rgba(255, 255, 255, 0.6); }
+        .typing-text { font-size: 3em; color: #fff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); margin-bottom: 10px; min-height: 1.2em; cursor: pointer; }
+        .subtitle { font-size: 1.8em; color: rgba(255, 255, 255, 0.9); opacity: 0; animation: fadeIn 1s ease forwards; animation-delay: 2s; }
+        .motto {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.95);
+            font-style: italic;
+            margin-top: 15px;
+            padding: 10px 20px;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: inline-block;
+            border-left: 3px solid rgba(255, 255, 255, 0.4);
+        }
+        .bio-section {
+            max-width: 600px;
+            margin: 20px auto 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .bio-text { color: rgba(255, 255, 255, 0.95); line-height: 1.8; font-size: 1.1em; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .cursor { display: inline-block; width: 3px; height: 1em; background: #fff; animation: blink 1s infinite; vertical-align: text-bottom; margin-left: 5px; }
+        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .section-title { color: #fff; font-size: 1.5em; margin-bottom: 20px; border-bottom: 2px solid rgba(255, 255, 255, 0.3); padding-bottom: 10px; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background: rgba(255, 255, 255, 0.2); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.9em; transition: all 0.3s ease; }
+        .tag:hover { background: rgba(255, 255, 255, 0.4); transform: scale(1.05); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .project-card { background: rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 25px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; }
+        .project-card:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-5px); }
+        .project-name { color: #fff; font-size: 1.3em; margin-bottom: 10px; }
+        .project-desc { color: rgba(255, 255, 255, 0.8); font-size: 0.95em; line-height: 1.6; }
+        .social-section { text-align: center; }
+        .social-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 20px; }
+        .social-item { text-align: center; color: #fff; }
+        .social-qr { width: 150px; height: 150px; background: rgba(255, 255, 255, 0.9); border-radius: 12px; padding: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .social-qr img { width: 100%; height: 100%; object-fit: contain; }
+        .social-label { font-size: 1.1em; font-weight: 500; color: #fff; }
+        .friend-links { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .friend-link { color: rgba(255, 255, 255, 0.9); text-decoration: none; padding: 10px 20px; background: rgba(255, 255, 255, 0.1); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; }
+        .friend-link:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+        .bilibili-btn { display: inline-flex; align-items: center; gap: 10px; background: #FB7299; color: #fff; text-decoration: none; padding: 15px 30px; border-radius: 30px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(251, 114, 153, 0.4); }
+        .bilibili-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(251, 114, 153, 0.6); }
+        .center-text { text-align: center; }
+        .footer { text-align: center; padding: 20px; color: rgba(255, 255, 255, 0.7); font-size: 0.9em; margin-top: 20px; line-height: 1.6; }
+        .footer a { color: rgba(255, 255, 255, 0.9); text-decoration: none; }
+        .footer a:hover { color: #fff; text-decoration: underline; }
+        
+        .feature-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .feature-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .feature-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        .showcase-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+        .showcase-item:hover {
+            transform: translateY(-5px);
+        }
+        .showcase-cover {
+            width: 100%;
+            padding-bottom: 100%;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+        .anime-cover, .book-cover {
+            padding-bottom: 133.33%;
+            border-radius: 8px;
+        }
+        .showcase-cover img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .showcase-item:hover .showcase-cover img {
+            transform: scale(1.05);
+        }
+        .showcase-cover-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .showcase-title {
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95em;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 5px;
+        }
+        .showcase-artist {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 5px;
+        }
+        .showcase-author {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 5px;
+        }
+
+        @media (max-width: 768px) { 
+            .showcase-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 15px;
+            }
+            .showcase-title {
+                font-size: 0.9em;
+            }
+            .showcase-cover-placeholder {
+                font-size: 2em;
+            }
+            .splash-main-title {
+                font-size: 42px;
+                letter-spacing: 6px;
+            }
+            .splash-sub-title {
+                font-size: 24px;
+                letter-spacing: 12px;
+            }
+            .japanese-subtitle {
+                font-size: 16px;
+                letter-spacing: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .showcase-title {
+                font-size: 0.85em;
+            }
+            .japanese-subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+
+</head>
+<body>
+    <!-- 加载进度条 -->
+    <div class="splash-progress-bar" id="progressBar"></div>
+    
+    <!-- 第一段加载动画页面 -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-container" id="splashContainer">
+            <div class="splash-ink-blob"></div>
+            <div class="splash-decoration-line left"></div>
+            <div class="splash-decoration-line right"></div>
+            
+            <div class="splash-title-wrapper">
+                <h1 class="splash-main-title">Razure_ink</h1>
+                <p class="splash-sub-title">青墨雨</p>
+            </div>
+            
+            <p class="splash-tagline">Software & Creation · 墨染青雨</p>
+        </div>
+        
+        <div class="splash-skip-hint" id="skipHint">点击加速进入 →</div>
+    </div>
+    
+<!-- 第二段动画页面（方法一版） -->
+<div class="splash-screen-second" id="splashScreenSecond">
+    <div class="splash-container-second">
+        <div class="japanese-text-wrapper">
+            <span class="japanese-letter">ラ</span>
+            <span class="japanese-letter">ズ</span>
+            <span class="japanese-letter">レ</span>
+            <span class="japanese-letter">ソ</span>
+            <span class="japanese-letter">フ</span>
+            <span class="japanese-letter">ト</span>
+        </div>
+        <p class="japanese-subtitle">RAZURESOFT</p>
+    </div>
+</div>
+    
+    <!-- 背景模糊层 -->
+    <div class="background-overlay"></div>
+    
+    <!-- 主站内容 -->
+    <div class="main-content" id="mainContent">
+        <!-- 音频播放器 -->
+        <audio id="intro-voice" preload="auto" style="display: none;"></audio>
+        <audio id="bg-music" loop style="display: none;"></audio>
+        
+        <div class="container">
+            <!-- 英雄区域 -->
+            <div class="glass-card hero">
+                <div class="avatar-container">
+                    
+                    <div class="avatar-placeholder">👤</div>
+                    
+                </div>
+                <h1 class="typing-text" id="typing-text" onclick="handleCialloClick()"></h1>
+                <p class="subtitle">I'm 青墨雨</p>
+                
+                <div class="motto">"于浩歌狂热之际中寒；于天上看见深渊。于一切眼中看见无所有；于无所希望中得救。"</div>
+                
+                
+                <div class="bio-section">
+                    <p class="bio-text">这里是青墨雨，一个热爱二次元的开发者。暂时只会Python/Java/PHP.</p>
+                </div>
+                
+            </div>
+
+            <!-- 功能入口按钮区域 -->
+            <div class="glass-card center-text">
+                <div class="feature-buttons">
+                    
+                    <a href="/blog" class="feature-btn">
+                        <span>📝</span> 我的博客
+                    </a>
+                    
+                </div>
+            </div>
+
+            <!-- 爱好和我爱做的事情 -->
+            <div class="content-grid">
+                <div class="glass-card">
+                    <h2 class="section-title">🎯 我的爱好</h2>
+                    <div class="tag-list">
+                        <span class="tag">编程</span><span class="tag">动漫</span>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h2 class="section-title">💝 我爱做的事情</h2>
+                    <div class="tag-list">
+                        <span class="tag">写代码</span><span class="tag">看番</span><span class="tag">听音乐</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 别人对我的标签 -->
+            
+            <div class="glass-card">
+                <h2 class="section-title">🏷️ 别人眼中的我</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 10px 0;">
+                    
+                    
+                    
+                    
+                    
+                        
+                    
+                    <span style="
+                        background: #FF6B6B;
+                        color: white;
+                        padding: 8px 18px;
+                        border-radius: 30px;
+                        font-size: 30.0px;
+                        display: inline-block;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        transition: all 0.3s ease;
+                        cursor: default;
+                        opacity: 0.9;
+                    " onmouseover="this.style.opacity='1'; this.style.transform='scale(1.05)'" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)'">
+                        技术大佬
+                        <span style="opacity:0.8; font-size:0.8em; margin-left:5px;">(5)</span>
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                        
+                    
+                    <span style="
+                        background: #4ECDC4;
+                        color: white;
+                        padding: 8px 18px;
+                        border-radius: 30px;
+                        font-size: 14.0px;
+                        display: inline-block;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        transition: all 0.3s ease;
+                        cursor: default;
+                        opacity: 0.9;
+                    " onmouseover="this.style.opacity='1'; this.style.transform='scale(1.05)'" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)'">
+                        温柔
+                        <span style="opacity:0.8; font-size:0.8em; margin-left:5px;">(3)</span>
+                    </span>
+                    
+                    
+                    
+                    
+                    
+                        
+                    
+                    <span style="
+                        background: #45B7D1;
+                        color: white;
+                        padding: 8px 18px;
+                        border-radius: 30px;
+                        font-size: 22.0px;
+                        display: inline-block;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        transition: all 0.3s ease;
+                        cursor: default;
+                        opacity: 0.9;
+                    " onmouseover="this.style.opacity='1'; this.style.transform='scale(1.05)'" onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)'">
+                        靠谱
+                        <span style="opacity:0.8; font-size:0.8em; margin-left:5px;">(4)</span>
+                    </span>
+                    
+                </div>
+            </div>
+            
+
+            <!-- 我的项目 -->
+            <div class="glass-card">
+                <h2 class="section-title">🚀 我的项目</h2>
+                <div class="projects-grid">
+                    
+                    <a href="#" class="project-card" target="_blank">
+                        <div class="project-name">个人主页</div>
+                        <div class="project-desc">这个网站本身</div>
+                    </a>
+                    
+                    <a href="http://nbpanel.ccccocccc.cc/" class="project-card" target="_blank">
+                        <div class="project-name">MonPanel</div>
+                        <div class="project-desc">一个普普通通的linux系统管理面板口牙</div>
+                    </a>
+                    
+                    <a href="http://icp.razure.ink/" class="project-card" target="_blank">
+                        <div class="project-name">樱ICP备案</div>
+                        <div class="project-desc">一个类似于备案的地方</div>
+                    </a>
+                    
+                </div>
+            </div>
+
+            <!-- 书籍展示柜 -->
+            
+            <div class="glass-card">
+                <h2 class="section-title">📚 我喜欢的书籍</h2>
+                <div class="showcase-grid">
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover book-cover">
+                            
+                            <img src="https://via.placeholder.com/400x600/2a5298/ffffff?text=%E4%B8%89%E4%BD%93" alt="三体" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">三体</div>
+                        
+                        <div class="showcase-author">刘慈欣</div>
+                        
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover book-cover">
+                            
+                            <img src="https://via.placeholder.com/400x600/2a5298/ffffff?text=%E8%A1%A5%E8%8D%AF" alt="补药啊，病娇校花别追我了" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">补药啊，病娇校花别追我了</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+            <!-- 博客最新文章预览 -->
+            
+            <div class="glass-card">
+                <h2 class="section-title">📝 最新博客</h2>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    
+                    <a href="/blog" style="text-decoration: none; color: inherit; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.05); transition: 0.3s;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: bold; color: #fff;">你好世界</div>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">2026-03-08</div>
+                            </div>
+                            <div style="color: rgba(255,255,255,0.4);">阅读 →</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/blog" style="text-decoration: none; color: inherit; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.05); transition: 0.3s;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: bold; color: #fff;">-webkit-text-stroke令人忍俊不禁</div>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">2026-03-08</div>
+                            </div>
+                            <div style="color: rgba(255,255,255,0.4);">阅读 →</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/blog" style="text-decoration: none; color: inherit; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.05); transition: 0.3s;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: bold; color: #fff;">此网站的更新日志</div>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">2026-03-10</div>
+                            </div>
+                            <div style="color: rgba(255,255,255,0.4);">阅读 →</div>
+                        </div>
+                    </a>
+                    
+                    <a href="/blog" style="text-decoration: none; color: inherit; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.05); transition: 0.3s;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: bold; color: #fff;">RazureSoft统一通行证接入文档</div>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.85em;">2026-03-22</div>
+                            </div>
+                            <div style="color: rgba(255,255,255,0.4);">阅读 →</div>
+                        </div>
+                    </a>
+                    
+                </div>
+                
+            </div>
+            
+
+            <!-- 音乐展示柜 -->
+            
+            <div class="glass-card">
+                <h2 class="section-title">🎵 我喜欢的音乐</h2>
+                <div class="showcase-grid">
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover">
+                            
+                            <img src="https://via.placeholder.com/500x500/2a5298/ffffff?text=cu" alt="cure for me" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">cure for me</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+            <!-- 番剧展示柜 -->
+            
+            <div class="glass-card">
+                <h2 class="section-title">📺 我喜欢的番剧</h2>
+                <div class="showcase-grid">
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover anime-cover">
+                            
+                            <img src="http://lain.bgm.tv/pic/cover/l/bb/56/333623_OLySB.jpg" alt="创之界限" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">创之界限</div>
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover anime-cover">
+                            
+                            <img src="http://lain.bgm.tv/pic/cover/l/c8/bd/333624_Z0E8G.jpg" alt="创之界限2" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">创之界限2</div>
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover anime-cover">
+                            
+                            <img src="http://lain.bgm.tv/pic/cover/l/94/8e/416777_xcDCg.jpg" alt="蔚蓝档案动画版" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">蔚蓝档案动画版</div>
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover anime-cover">
+                            
+                            <img src="http://lain.bgm.tv/pic/cover/l/7c/8e/424883_5X5X2.jpg" alt="不时用俄语小声说真心话的邻桌艾莉同学" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">不时用俄语小声说真心话的邻桌艾莉同学</div>
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover anime-cover">
+                            
+                            <img src="http://lain.bgm.tv/pic/cover/l/6e/01/7157_hF46A.jpg" alt="缘之空" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">缘之空</div>
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="showcase-cover anime-cover">
+                            
+                            <img src="http://lain.bgm.tv/pic/cover/l/7e/ca/378862_24TnR.jpg" alt="别当欧尼酱了" loading="lazy">
+                            
+                        </div>
+                        <div class="showcase-title">别当欧尼酱了</div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+            <!-- 社交二维码 -->
+            
+
+            <!-- 友情链接 -->
+            
+            <div class="glass-card center-text">
+                <h2 class="section-title">🔗 友情链接</h2>
+                <div class="friend-links">
+                    
+                    <a href="http://nbpanel.ccccocccc.cc/" class="friend-link" target="_blank">monpanel</a>
+                    
+                    <a href="http://icp.razure.ink/" class="friend-link" target="_blank">樱ICP备案</a>
+                    
+                </div>
+            </div>
+            
+
+            <!-- B站关注按钮 -->
+            <div class="glass-card center-text">
+                <h2 class="section-title" style="border: none;">📺 关注我</h2>
+                <a href="https://space.bilibili.com/3537115719665899?spm_id_from=333.337.0.0" class="bilibili-btn" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/>
+                    </svg>
+                    访问我的B站空间
+                </a>
+            </div>
+
+            <!-- 底部备案信息 -->
+            
+            <div class="footer">
+                <a href="http://icp.razure.ink/icp?keyword=20260721" target="_blank">樱ICP备 20260721 号</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // ========== 音频文件列表（构建时由 build.py 注入）==========
+        const VOICE_FILES = ["-_.mp3", "08.mp3", "WC.mp3", "nnciallo.mp3"];
+        const MUSIC_FILES = ["-_.mp3", "08.mp3", "WC.mp3", "nnciallo.mp3"];
+        
+        console.log('找到语音文件:', VOICE_FILES);
+        console.log('找到音乐文件:', MUSIC_FILES);
+
+        // 从列表中随机选一个
+        function pickRandom(list) {
+            if (!list || list.length === 0) return null;
+            return list[Math.floor(Math.random() * list.length)];
+        }
+
+        // ========== 加载动画控制 ==========
+        let fadeOutStarted = false;
+        let secondSplashVisible = false;
+        
+        const splashScreen = document.getElementById('splashScreen');
+        const splashScreenSecond = document.getElementById('splashScreenSecond');
+        const mainContent = document.getElementById('mainContent');
+        const skipHint = document.getElementById('skipHint');
+        const progressBar = document.getElementById('progressBar');
+        const introVoice = document.getElementById('intro-voice');
+        
+        // 模拟加载进度
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            if (!fadeOutStarted) {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(progressInterval);
+                    setTimeout(() => {
+                        if (!fadeOutStarted) {
+                            fadeOutAndShowSecond();
+                        }
+                    }, 500);
+                }
+                progressBar.style.width = progress + '%';
+            }
+        }, 200);
+
+        // 点击加速进入第一段
+        function accelerateAndEnter() {
+            if (fadeOutStarted) return;
+            
+            const splashContainer = document.getElementById('splashContainer');
+            splashContainer.style.animation = 'none';
+            splashContainer.style.opacity = '1';
+            
+            fadeOutAndShowSecond();
+        }
+
+        // 第一段动画淡出，显示第二段动画
+        function fadeOutAndShowSecond() {
+            if (fadeOutStarted) return;
+            fadeOutStarted = true;
+            
+            clearInterval(progressInterval);
+            progressBar.style.width = '100%';
+            
+            splashScreen.classList.add('fade-out');
+            
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                splashScreenSecond.style.display = 'flex';
+                secondSplashVisible = true;
+                
+                // 进入第二动画立即播放语音
+                const selectedVoice = pickRandom(VOICE_FILES);
+                if (selectedVoice) {
+                    console.log('播放语音:', selectedVoice);
+                    
+                    if (introVoice) {
+                        introVoice.src = '/static/music/' + selectedVoice;
+                        introVoice.load();
+                        
+                        // 立即尝试播放
+                        let playPromise = introVoice.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                console.log('自动播放被阻止，等待用户首次点击:', error);
+                                // 如果自动播放被阻止，等待用户点击第一屏
+                                splashScreenSecond.addEventListener('click', function playOnFirstClick() {
+                                    introVoice.play();
+                                    splashScreenSecond.removeEventListener('click', playOnFirstClick);
+                                }, {once: true});
+                            });
+                        }
+                    }
+                }
+                
+                // 语音播放结束后自动关闭
+                introVoice.onended = function() {
+                    console.log('语音播放结束，自动关闭');
+                    closeSecondSplash();
+                };
+                
+            }, 800);
+        }
+
+        // 点击第二段动画直接关闭
+        function handleSecondSplashClick() {
+            console.log('点击关闭第二动画');
+            closeSecondSplash();
+        }
+
+        // 播放一首随机音乐（前端实现，替代原后端 /api/play-once）
+        function playRandomMusic() {
+            const selectedMusic = pickRandom(MUSIC_FILES);
+            if (!selectedMusic) return;
+            const bgMusic = document.getElementById('bg-music');
+            if (!bgMusic) return;
+            bgMusic.src = '/static/music/' + encodeURIComponent(selectedMusic);
+            bgMusic.loop = false;
+            bgMusic.onended = function() {
+                bgMusic.pause();
+                bgMusic.currentTime = 0;
+                bgMusic.removeAttribute('src');
+                bgMusic.load();
+                bgMusic.onended = null;
+            };
+            bgMusic.play().catch(e => {
+                console.log('背景音乐自动播放被阻止:', e);
+            });
+        }
+
+        // 关闭第二段动画并显示主站
+        function closeSecondSplash() {
+            if (!secondSplashVisible) return;
+            
+            // 停止正在播放的语音
+            if (introVoice && !introVoice.paused) {
+                introVoice.pause();
+                introVoice.currentTime = 0;
+            }
+            
+            splashScreenSecond.classList.add('fade-out');
+            
+            setTimeout(() => {
+                splashScreenSecond.style.display = 'none';
+                mainContent.classList.add('visible');
+                secondSplashVisible = false;
+                
+                // 启动主站的打字效果
+                setTimeout(typeWriter, 500);
+                
+                // 播放背景音乐
+                playRandomMusic();
+            }, 800);
+        }
+
+        // 点击事件
+        splashScreen.addEventListener('click', accelerateAndEnter);
+        skipHint.addEventListener('click', accelerateAndEnter);
+        splashScreenSecond.addEventListener('click', handleSecondSplashClick);  // 点击任意位置关闭
+
+        // 设置自动进入时间（5秒后自动进入第一段结束）
+        setTimeout(() => {
+            if (!fadeOutStarted) {
+                fadeOutAndShowSecond();
+            }
+        }, 5000);
+
+        // ========== 主站功能 ==========
+        let cialloCount = localStorage.getItem('cialloCount') ? parseInt(localStorage.getItem('cialloCount')) : 0;
+        let audioPlayer = document.getElementById('bg-music');
+        
+        function handleCialloClick() {
+            cialloCount++;
+            localStorage.setItem('cialloCount', cialloCount);
+            
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+            audioPlayer.removeAttribute('src');
+            audioPlayer.load();
+            
+            playRandomMusic();
+        }
+
+        // 打字效果
+        const text = "Ciallo～(∠・ω< )⌒★";
+        const typingElement = document.getElementById('typing-text');
+        let index = 0;
+        
+        function typeWriter() {
+            if (index < text.length) {
+                typingElement.innerHTML = text.substring(0, index + 1) + '<span class="cursor"></span>';
+                index++;
+                setTimeout(typeWriter, 150);
+            } else {
+                typingElement.innerHTML = text + '<span class="cursor"></span>';
+            }
+        }
+    </script>
+</body>
+</html>

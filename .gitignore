@@ -1,0 +1,45 @@
+__pycache__/
+*.pyc
+*.db
+*.log
+
+# Flask 应用源文件（静态站不需要）
+/homepage.py
+
+# 桌面杂项
+/*.pptx
+/*.exe
+/*.msi
+/1.txt
+
+# 根目录 mp3（已复制到 static/music/）
+/*.mp3
+
+# Flask 模板（仅保留 templates/index.html 作为构建模板）
+/admin.html
+/admin_comments.html
+/admin_fonts.html
+/blog.html
+/blog_post.html
+/books.html
+/book_cover_select.html
+/book_detail.html
+/diary.html
+/diary_edit.html
+/diary_post.html
+/dev.html
+/first_setup.html
+/login.html
+/notebook.html
+/notebook_post.html
+/post_blog.html
+/post_notebook.html
+/submission.html
+/submissions_admin.html
+/view.html
+
+# Gmeek 构建产物
+/gmeek_src/blogBase.json
+/gmeek_src/docs/
+/gmeek_src/backup/
+/gmeek_src/__pycache__/

@@ -1,0 +1,181 @@
+{
+  "site_title": "青墨雨",
+  "motto": "于浩歌狂热之际中寒；于天上看见深渊。于一切眼中看见无所有；于无所希望中得救。",
+  "bio": "这里是青墨雨，一个热爱二次元的开发者。暂时只会Python/Java/PHP.",
+  "hobbies": [
+    "编程",
+    "动漫"
+  ],
+  "loves": [
+    "写代码",
+    "看番",
+    "听音乐"
+  ],
+  "projects": [
+    {
+      "name": "个人主页",
+      "desc": "这个网站本身",
+      "link": "#"
+    },
+    {
+      "name": "MonPanel",
+      "desc": "一个普普通通的linux系统管理面板口牙",
+      "link": "http://nbpanel.ccccocccc.cc/"
+    },
+    {
+      "name": "樱ICP备案",
+      "desc": "一个类似于备案的地方",
+      "link": "http://icp.razure.ink/"
+    }
+  ],
+  "bilibili_link": "https://space.bilibili.com/3537115719665899?spm_id_from=333.337.0.0",
+  "background_type": "url",
+  "background_url": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80",
+  "background_local": null,
+  "background_blur": true,
+  "background_opacity": 0.4,
+  "avatar": null,
+  "footer_html": "<a href=\"http://icp.razure.ink/icp?keyword=20260721\" target=\"_blank\">樱ICP备 20260721 号</a>",
+  "friend_links": [
+    {
+      "name": "monpanel",
+      "url": "http://nbpanel.ccccocccc.cc/"
+    },
+    {
+      "name": "樱ICP备案",
+      "url": "http://icp.razure.ink/"
+    }
+  ],
+  "wechat_qr": null,
+  "qq_qr": null,
+  "favicon": null,
+  "notebook_enabled": false,
+  "music_enabled": true,
+  "anime_enabled": true,
+  "music_items": [
+    {
+      "title": "cure for me",
+      "artist": "",
+      "cover": "https://via.placeholder.com/500x500/2a5298/ffffff?text=cu"
+    }
+  ],
+  "anime_items": [
+    {
+      "title": "创之界限",
+      "cover": "http://lain.bgm.tv/pic/cover/l/bb/56/333623_OLySB.jpg"
+    },
+    {
+      "title": "创之界限2",
+      "cover": "http://lain.bgm.tv/pic/cover/l/c8/bd/333624_Z0E8G.jpg"
+    },
+    {
+      "title": "蔚蓝档案动画版",
+      "cover": "http://lain.bgm.tv/pic/cover/l/94/8e/416777_xcDCg.jpg"
+    },
+    {
+      "title": "不时用俄语小声说真心话的邻桌艾莉同学",
+      "cover": "http://lain.bgm.tv/pic/cover/l/7c/8e/424883_5X5X2.jpg"
+    },
+    {
+      "title": "缘之空",
+      "cover": "http://lain.bgm.tv/pic/cover/l/6e/01/7157_hF46A.jpg"
+    },
+    {
+      "title": "别当欧尼酱了",
+      "cover": "http://lain.bgm.tv/pic/cover/l/7e/ca/378862_24TnR.jpg"
+    }
+  ],
+  "tags_from_others": [
+    {
+      "tag": "技术大佬",
+      "count": 5,
+      "color": "#FF6B6B"
+    },
+    {
+      "tag": "温柔",
+      "count": 3,
+      "color": "#4ECDC4"
+    },
+    {
+      "tag": "靠谱",
+      "count": 4,
+      "color": "#45B7D1"
+    }
+  ],
+  "theme": "default",
+  "custom_css": "",
+  "books_enabled": true,
+  "book_items": [
+    {
+      "id": 1,
+      "title": "三体",
+      "author": "刘慈欣",
+      "description": "",
+      "type": "novel",
+      "url": "",
+      "cover": "https://via.placeholder.com/400x600/2a5298/ffffff?text=%E4%B8%89%E4%BD%93",
+      "added_date": "2026-03-08",
+      "tomato_keyword": "三体"
+    },
+    {
+      "id": 2,
+      "title": "补药啊，病娇校花别追我了",
+      "author": "",
+      "description": "",
+      "type": "novel",
+      "url": "",
+      "cover": "https://via.placeholder.com/400x600/2a5298/ffffff?text=%E8%A1%A5%E8%8D%AF",
+      "added_date": "2026-03-08",
+      "tomato_keyword": "病娇校花"
+    }
+  ],
+  "blog_enabled": true,
+  "blog_posts": [
+    {
+      "id": 1,
+      "title": "你好世界",
+      "content": "print('Hello World!')",
+      "category": "技术",
+      "summary": "Hello,World!",
+      "date": "2026-03-08"
+    },
+    {
+      "id": 2,
+      "title": "-webkit-text-stroke令人忍俊不禁",
+      "content": "诶我靠用上这个-webkit-text-stroke以后代码量变低了，维护难度低了，复杂程度低了，兼容性也低了😂",
+      "category": "技术",
+      "summary": "-webkit-text-stroke令人忍俊不禁",
+      "date": "2026-03-08"
+    },
+    {
+      "id": 3,
+      "title": "此网站的更新日志",
+      "content": "1.6beta2 增加网页上传",
+      "category": "技术",
+      "summary": "更新日志罢了",
+      "date": "2026-03-10"
+    },
+    {
+      "id": 4,
+      "title": "RazureSoft统一通行证接入文档",
+      "content": "RazureSoft 统一通行证完整接入指南（基于Python）",
+      "category": "技术",
+      "summary": "RazureSoft统一通行证接入文档 基于Python",
+      "date": "2026-03-22"
+    }
+  ],
+  "name_display": "青墨雨",
+  "font_settings": {
+    "enabled": false,
+    "family": "system",
+    "custom_font": null,
+    "custom_font_name": null,
+    "font_weight": "normal",
+    "font_style": "normal",
+    "letter_spacing": "normal",
+    "line_height": "1.6",
+    "font_size_base": "16px",
+    "heading_font": "inherit",
+    "content_font": "inherit"
+  }
+}
